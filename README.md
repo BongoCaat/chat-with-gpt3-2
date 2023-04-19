@@ -31,7 +31,3 @@ Your API key is stored only on your device and is never transmitted to anyone ex
 To use the realistic AI text-to-speech feature, you will need to add your ElevenLabs API key by clicking "Play" next to any message.
 
 Your API key is stored only on your device and never transmitted to anyone except ElevenLabs.
-
-## License
-
-Chat with GPT is licensed under the MIT license. See the LICENSE file for more information.
