@@ -10,8 +10,8 @@ const auth0Config: ConfigParams = {
     clientID: config.auth0?.clientID,
     issuerBaseURL: config.auth0?.issuer,
     routes: {
-        login: false,
-        logout: false,
+        login: true,
+        logout: true,
     },
 };
 

@@ -7,7 +7,7 @@ module.exports = function (app) {
         '/chatapi',
         createProxyMiddleware({
             target: 'http://localhost:3000',
-            secure: true,
+            secure: false,
             changeOrigin: true,
         })
     );
