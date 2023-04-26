@@ -16,7 +16,7 @@ export const secondaryMenu: MenuItem[] = [
     },
     {
         label: "GitHub",
-        link: "https://github.com/BongoCaat/chat-with-gpt3",
+        link: "https://github.com/BongoCaat/chat-with-gpt3-2",
         icon: "github fab",
     },
 ];
