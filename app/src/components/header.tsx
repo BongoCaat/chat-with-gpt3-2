@@ -207,15 +207,7 @@ export default function Header(props: HeaderProps) {
             {backend.current && !props.share && props.canShare && typeof navigator.share !== 'undefined' && <HeaderButton icon="share" onClick={props.onShare}>
                 <FormattedMessage defaultMessage="Compartir" description="Etiqueta para el botón utilizado para crear una URL pública compartida para un registro de chat" />
             </HeaderButton>}
-            {backend.current && !context.authenticated && (
-                <HeaderButton onClick={localStorage.getItem('registered') ? signIn : signUp}>
-                    <FormattedMessage defaultMessage="Iniciar sesión <h>para sincronizar</h>"
-                        description="Etiqueta para el botón de inicio de sesión, lo que indica que el propósito de iniciar sesión es sincronizar sus datos entre dispositivos.El texto menos importante dentro de las etiquetas <h> está oculta en pantallas pequeñas."
-                        values={{
-                            h: (chunks: any) => <span className="hide-on-mobile">{chunks}</span>
-                        }} />
-                </HeaderButton>
-            )}
+            
             <HeaderButton icon="plus" onClick={onNewChat} loading={loading} variant="light">
                 <FormattedMessage defaultMessage="Nuevo chat" description="Etiqueta para el botón utilizado para iniciar una nueva sesión de chat" />
             </HeaderButton>
