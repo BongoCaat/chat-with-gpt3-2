@@ -49,32 +49,16 @@ export const parameterOptions: OptionGroup = {
             displayInQuickSettings: {
                 name: "Temperatura",
                 displayByDefault: true,
-                label: (value) => `Temperatura: ${value.toFixed(1)}`,
+                label: (value) => "Temperatura: " + value.toFixed(1),
             },
             renderProps: (value, options, context) => ({
                 type: "slider",
-                label: `Temperatura: ${value.toFixed(1)}`,
+                label: "Temperatura: " + value.toFixed(1),
                 min: 0,
                 max: 1,
                 step: 0.1,
-                style: {
-                    textAlign: "center",
-                },
-                children: (
-                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: "0.5rem", marginBottom: "2.5rem" }}>
-                        <div style={{ textAlign: "center" }}>
-                            <p style={{ fontWeight: value <= 0 ? "bold" : "normal" }}>Preciso</p>
-                        </div>
-                        <div style={{ textAlign: "center" }}>
-                            <p style={{ fontWeight: value > 0 && value < 1 ? "bold" : "normal" }}>Neutro</p>
-                        </div>
-                        <div style={{ textAlign: "center" }}>
-                            <p style={{ fontWeight: value >= 1 ? "bold" : "normal" }}>Creativo</p>
-                        </div>
-                    </div>
-                ),
                 description: context.intl.formatMessage({ defaultMessage: "El parámetro de temperatura controla la aleatoriedad de las respuestas de la IA. Los valores más bajos harán que la IA sea más precisa, mientras que los valores más altos lo harán más creativo." }),
-            }),
-        },
+            })
+        }
     ],
 };

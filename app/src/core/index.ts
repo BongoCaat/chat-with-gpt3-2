@@ -64,7 +64,7 @@ export class ChatManager extends EventEmitter {
         const doc = this.doc as YChatDoc | undefined;
         const provider = this.provider as IndexeddbPersistence | undefined;
         doc?.removeAllListeners();
-        
+
         const pluginOptionsManager = this.options as OptionsManager | undefined;
         pluginOptionsManager?.destroy();
 
@@ -81,15 +81,17 @@ export class ChatManager extends EventEmitter {
         });
         this.search = new Search(this);
 
+        this.options = new OptionsManager(this.doc, pluginMetadata);
+        this.options.on('update', (...args) => this.emit('plugin-options-update', ...args));
+
         // connect new doc to persistance, scoped to the current username
         this.provider = new IndexeddbPersistence('chats:' + username, this.doc.root);
         this.provider.whenSynced.then(() => {
             this.doc.getChatIDs().map(id => this.emit(id));
             this.emit('update');
+            this.doc.emit('ready');
+            this.options.reloadOptions();
         });
-
-        this.options = new OptionsManager(this.doc, pluginMetadata);
-        this.options.on('update', (...args) => this.emit('plugin-options-update', ...args));
 
         pluginRunner(
             'init',

@@ -7,7 +7,7 @@ import { backend } from "../backend";
 export const defaultModel = 'gpt-3.5-turbo';
 
 export function isProxySupported() {
-    return !!backend.current?.user?.services?.includes('openai');
+    return !!backend.current?.services?.includes('openai');
 }
 
 function shouldUseProxy(apiKey: string | undefined | null) {

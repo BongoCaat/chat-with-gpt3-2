@@ -20,7 +20,7 @@ export const openAIOptions: OptionGroup = {
                         </a>
                     </p>
                     <p>
-                        <FormattedMessage defaultMessage="Su clave API se almacena solo en este dispositivo y nunca se transmite a nadie excepto OpenAI." />
+                        <FormattedMessage defaultMessage="Su clave API se almacena solo en este dispositivo y nunca se transmite a nadie excepto a OpenAI." />
                     </p>
                     <p>
                         <FormattedMessage defaultMessage="El uso de la clave de la API de OpenAI se factura a una tarifa de pago por uso, separado de su suscripción ChatGPT." />
