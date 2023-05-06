@@ -222,7 +222,7 @@ export default function MessageComponent(props: { message: Message, last: boolea
                 }
                 break;
             case 'assistant':
-                return intl.formatMessage({ id: 'role-chatgpt', defaultMessage: 'ChatGPT 🤖', description: "Etiqueta que se muestra arriba mensajes escritos por la IA (a diferencia del usuario)" });
+                return intl.formatMessage({ id: 'role-chatgpt', defaultMessage: '🤖 ChatGPT 🤖', description: "Etiqueta que se muestra arriba mensajes escritos por la IA (a diferencia del usuario)" });
             case 'system':
                 return intl.formatMessage({ id: 'role-system', defaultMessage: 'System', description: "Etiqueta que se muestra arriba los mensajes insertados en la conversación automáticamente por el sistema (a diferencia del usuario o la IA)" });
             default:
