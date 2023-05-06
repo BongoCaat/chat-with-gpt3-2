@@ -204,20 +204,3 @@ export function getIndicatorOptions() {
         { label: "Act as a Pirate", value: "Arr, ChatGPT, for the sake o' this here conversation, let's speak like pirates, like real scurvy sea dogs, aye aye?" },
     ];
 }
-
-/*
-
-import { defaultSystemPrompt } from "../plugins/system-prompt";
-
-export function getIndicatorOptions() {
-    return [
-        { label: "Mensaje predeterminado", value: defaultSystemPrompt },
-        ...
-        ...
-        ...
-        { label: "Act as a Pirate", value: "Arr, ChatGPT, for the sake o' this here conversation, let's speak like pirates, like real scurvy sea dogs, aye aye?" },
-        ...
-    ];
-}
-
-*/

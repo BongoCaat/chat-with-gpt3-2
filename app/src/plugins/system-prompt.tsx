@@ -6,9 +6,9 @@ import { getIndicatorOptions } from "../store/IndicatorOptions";
 import React from "react";
 
 export const defaultSystemPrompt = `
-Eres ChatGPT, un modelo de lenguaje grande entrenado por OpenAI.
-Corte de conocimiento: 2021-09
-Fecha y hora actuales: {{ datetime }}
+You are ChatGPT, a large language model trained by OpenAI (Reply in the user's language).
+Knowledge cutoff: 2021-09
+Current date and time: {{ datetime }}
 `.trim();
 
 interface SystemPromptPluginOptions {
@@ -46,7 +46,10 @@ export class SystemPromptPlugin extends Plugin<SystemPromptPluginOptions> {
             renderProps: {
                 type: "select",
                 options: [
-                    ...indicatorOptions.map(option => ({ value: option.value, label: option.label })),
+                    ...indicatorOptions.map(option => ({
+                      value: `${option.value} (Reply in the user's language).`,
+                      label: option.label
+                    })),
                 ],
                 onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
                     const selectedOption = e.target.value;
