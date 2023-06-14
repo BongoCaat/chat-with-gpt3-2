@@ -71,9 +71,9 @@ export default class ChatServer {
 
         this.app.get('/chatapi/health', (req, res) => new HealthRequestHandler(this, req, res));
 
-        /*this.app.get('/chatapi/session',
+        this.app.get('/chatapi/session',
             rateLimit({ windowMs: 60 * 1000, max: 100 }),
-            (req, res) => new SessionRequestHandler(this, req, res));*/
+            (req, res) => new SessionRequestHandler(this, req, res));
 
         this.app.post('/chatapi/y-sync',
             rateLimit({ windowMs: 60 * 1000, max: 100 }),
