@@ -24,7 +24,7 @@ export const parameterOptions: OptionGroup = {
                         defaultMessage: "Nota: GPT-4 solo funcionará si a su cuenta OpenAI se le ha otorgado acceso al nuevo modelo. <a>Solicite acceso aquí.</a>",
                     },
                     { 
-                        a: (text: string) => <a href="https://openai.com/waitlist/gpt-4-api" target="_blank" rel="noreferer">{text}</a>
+                        a: (text: string) => <a href="https://openai.com/waitlist/gpt-4-api" target="_blank" rel="noreferrer">{text}</a>
                     } as any,
                 ),
                 options: [
