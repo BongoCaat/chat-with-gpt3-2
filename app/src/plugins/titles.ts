@@ -6,11 +6,13 @@ import { defaultModel } from "../core/chat/openai";
 
 export const systemPrompt = `
 Please read the following exchange and write a short, concise title describing the topic (in the user's language).
+ALWAYS write a title for the conversation.
 If there is no clear topic for the exchange, respond with: N/A
 `.trim();
 
 export const systemPromptForLongExchanges = `
 Please read the following exchange and write a short, concise title describing the topic (in the user's language).
+ALWAYS write a title for the conversation.
 `.trim();
 
 export interface TitlePluginOptions {

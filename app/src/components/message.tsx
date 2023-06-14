@@ -293,7 +293,7 @@ export default function MessageComponent(props: { message: Message, last: boolea
                         <Textarea value={content}
                             onChange={e => setContent(e.currentTarget.value)}
                             autosize={true} />
-                        <Button variant="light" onClick={() => context.editMessage(props.message, content)}>
+                        <Button variant="light" style={{ marginRight: '1rem' }} onClick={() => context.editMessage(props.message, content)}>
                             <FormattedMessage defaultMessage="Guardar cambios" description="Etiqueta para un botón que aparece cuando el usuario está editando el texto de uno de sus mensajes, para guardar los cambios" />
                         </Button>
                         <Button variant="subtle" onClick={() => setEditing(false)}>

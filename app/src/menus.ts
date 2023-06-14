@@ -6,10 +6,6 @@ export interface MenuItem {
 
 export const secondaryMenu: MenuItem[] = [
     {
-        label: "APIs",
-        link: "https://controlc.com/49931130",
-    },
-    {
         label: "ChatGPT",
         link: "https://ai.com",
         //icon: "external-link-alt",

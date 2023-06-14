@@ -224,7 +224,7 @@ export class YChatDoc extends EventEmitter {
         const chat = this.getYChat(message.chatID, true);
 
         if (!chat) {
-            throw new Error('Chat not found');
+            throw new Error('Chat no encontrado');
         }
 
         this.transact(() => {

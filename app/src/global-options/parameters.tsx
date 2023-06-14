@@ -24,13 +24,17 @@ export const parameterOptions: OptionGroup = {
                         defaultMessage: "Nota: GPT-4 solo funcionará si a su cuenta OpenAI se le ha otorgado acceso al nuevo modelo. <a>Solicite acceso aquí.</a>",
                     },
                     { 
-                        a: (text: string) => <a href="https://openai.com/waitlist/gpt-4-api" target="_blank" rel="noreferer">{text}</a> 
+                        a: (text: string) => <a href="https://openai.com/waitlist/gpt-4-api" target="_blank" rel="noreferer">{text}</a>
                     } as any,
                 ),
                 options: [
                     {
                         label: "GPT 3.5 Turbo (Por defecto)",
                         value: "gpt-3.5-turbo",
+                    },
+                    {
+                        label: "GPT 3.5 Turbo 16k",
+                        value: "gpt-3.5-turbo-16k",
                     },
                     {
                         label: "GPT 4 (Requiere invitación)",
