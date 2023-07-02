@@ -47,7 +47,7 @@ export class SystemPromptPlugin extends Plugin<SystemPromptPluginOptions> {
                 type: "select",
                 options: [
                     ...indicatorOptions.map(option => ({
-                      value: `${option.value} (Reply in the user's language, but if the prompt is for a specific language keep talking in that language and say to the user that you are talking that specific language because of the prompt, example of specific prompts: english improver, english pronunciation helper, etc..).`,
+                      value: `${option.value} (Reply in the user's language).`,
                       label: option.label
                     })),
                 ],

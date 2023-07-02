@@ -48,3 +48,25 @@ export const inputOptions: OptionGroup = {
         },
     ],
 }
+
+export const markdownOptions: OptionGroup = {
+    id: 'markdown',
+    name: "Markdown",
+    options: [
+        {
+            id: 'katex',
+            defaultValue: false,
+            displayOnSettingsScreen: "ui",
+            displayInQuickSettings: {
+                name: "Habilitar/Deshabilitar Katex",
+                displayByDefault: true,
+                label: (value) => value ? "Deshabilitar Katex" : "Habilitar Katex",
+            },
+            renderProps: {
+                type: "checkbox",
+                label: "Habilitar la representación matemática de Katex ( Experimental )",
+                description: "Usa ' $ ' antes y luego de la operación matemática. Ej: $x = 5$",
+            },
+        },
+    ],
+}

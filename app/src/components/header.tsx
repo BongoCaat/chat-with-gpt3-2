@@ -196,7 +196,7 @@ export default function Header(props: HeaderProps) {
             <Helmet>
                 <title>
                     {props.title ? `${props.title} - ` : ''}
-                    {intl.formatMessage({ defaultMessage: "ChatGPT | BongoCaat#5645", description: "Etiqueta de título HTML" })}
+                    {intl.formatMessage({ defaultMessage: "ChatGPT | Bongo", description: "Etiqueta de título HTML" })}
                 </title>
             </Helmet>
             {!sidebarOpen && <Burger opened={sidebarOpen} onClick={onBurgerClick} aria-label={burgerLabel} transitionDuration={0} />}
