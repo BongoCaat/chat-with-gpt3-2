@@ -52,7 +52,7 @@ export class TitlePlugin extends Plugin<TitlePluginOptions> {
                 messages = [
                     {
                         role: 'system',
-                        content: tokens.length > 512 ? systemPromptForLongExchanges : systemPrompt,
+                        content: tokens.length > 1024 ? systemPromptForLongExchanges : systemPrompt,
                     },
                     {
                         role: 'user',

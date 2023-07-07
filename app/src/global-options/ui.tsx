@@ -55,7 +55,7 @@ export const markdownOptions: OptionGroup = {
     options: [
         {
             id: 'katex',
-            defaultValue: false,
+            defaultValue: true,
             displayOnSettingsScreen: "ui",
             displayInQuickSettings: {
                 name: "Habilitar/Deshabilitar Katex",
