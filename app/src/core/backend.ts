@@ -250,7 +250,7 @@ export class Backend extends EventEmitter {
     }
 
     async get(url: string) {
-        const response = await this.get(url);
+        const response = await fetch(url);
         if (response.status === 429) {
             this.rateLimitedUntil = getRateLimitResetTimeFromResponse(response);
         }
@@ -261,7 +261,7 @@ export class Backend extends EventEmitter {
     }
 
     async post(url: string, data: any) {
-        const response = await this.post(url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
