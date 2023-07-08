@@ -57,8 +57,8 @@ export class ReplyRequest extends EventEmitter {
 
         this.timer = setInterval(() => {
             const sinceLastChunk = Date.now() - this.lastChunkReceivedAt;
-            if (sinceLastChunk > 30000 && !this.done) {
-                this.onError('Sin respuesta de OpenAI en los últimos 30 segundos');
+            if (sinceLastChunk > 50000 && !this.done) {
+                this.onError('Sin respuesta de OpenAI en los últimos 50 segundos');
             }
         }, 2000);
     }
@@ -160,7 +160,7 @@ export class ReplyRequest extends EventEmitter {
         clearInterval(this.timer);
         this.cancelSSE?.();
 
-        this.content += `\n\nLo siento, tengo problemas para conectarme con OpenAI (${error || 'Sin respuesta de la API'}). Asegúrese de haber ingresado su clave API de OpenAI correctamente e intente nuevamente. O.O`;
+        this.content += `\n\nLo siento, tengo problemas para conectarme con OpenAI (${error || 'Sin respuesta de la API'}). Asegúrese de haber ingresado su clave API de OpenAI correctamente e intente nuevamente.`;
         this.content = this.content.trim();
 
         this.yChat.setMessageContent(this.replyID, this.content);

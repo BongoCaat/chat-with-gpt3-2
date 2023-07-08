@@ -202,12 +202,12 @@ export default function Header(props: HeaderProps) {
             {!sidebarOpen && <Burger opened={sidebarOpen} onClick={onBurgerClick} aria-label={burgerLabel} transitionDuration={0} />}
             {context.isHome && <h2>{intl.formatMessage({ defaultMessage: "ChatGPT | Bongo", description: "Nombre de la aplicación" })}</h2>}
             <div className="spacer" />
-            <HeaderButton icon="search" onClick={spotlight.openSpotlight} />
+            {/*<HeaderButton icon="search" onClick={spotlight.openSpotlight} />*/}
             <HeaderButton icon="gear" onClick={openSettings} />
-            {backend.current && !props.share && props.canShare && typeof navigator.share !== 'undefined' && <HeaderButton icon="share" onClick={props.onShare}>
+            {backend.current && !props.share && props.canShare && /*typeof navigator.share !== 'undefined' &&*/ <HeaderButton icon="share" onClick={props.onShare}>
                 <FormattedMessage defaultMessage="Compartir" description="Etiqueta para el botón utilizado para crear una URL pública compartida para un registro de chat" />
             </HeaderButton>}
-            
+
             <HeaderButton icon="plus" onClick={onNewChat} loading={loading} variant="light">
                 <FormattedMessage defaultMessage="Nuevo chat" description="Etiqueta para el botón utilizado para iniciar una nueva sesión de chat" />
             </HeaderButton>

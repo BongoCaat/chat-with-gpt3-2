@@ -225,7 +225,7 @@ export default function MessageComponent(props: { message: Message, last: boolea
                 }
                 break;
             case 'assistant':
-                return intl.formatMessage({ id: 'role-chatgpt', defaultMessage: '🤖 ChatGPT 🤖', description: "Etiqueta que se muestra arriba mensajes escritos por la IA (a diferencia del usuario)" });
+                return intl.formatMessage({ id: 'role-chatgpt', defaultMessage: 'ChatGPT', description: "Etiqueta que se muestra arriba mensajes escritos por la IA (a diferencia del usuario)" });
             case 'system':
                 return intl.formatMessage({ id: 'role-system', defaultMessage: 'System', description: "Etiqueta que se muestra arriba los mensajes insertados en la conversación automáticamente por el sistema (a diferencia del usuario o la IA)" });
             default:
@@ -244,7 +244,7 @@ export default function MessageComponent(props: { message: Message, last: boolea
                     <div className="metadata">
                         <span>
                             <strong>
-                            {getRoleName(props.message.role, props.share)}{props.message.model === 'gpt-4' && ' (GPT 4)'}{props.message.model === 'gpt-4-32k' && ' (GPT 4 32k)'}<SROnly>:</SROnly>
+                            {getRoleName(props.message.role, props.share)}{props.message.model === 'gpt-4' && ' (GPT 4) '}{props.message.model === 'gpt-4-32k' && ' (GPT 4) '}<SROnly>:</SROnly>
                             </strong>
                             {props.message.role === 'assistant' && props.last && !props.message.done && <InlineLoader />}
                         </span>
