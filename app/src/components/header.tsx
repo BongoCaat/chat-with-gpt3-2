@@ -231,14 +231,12 @@ export default function Header(props: HeaderProps) {
             <div className="spacer" />
             {/*<HeaderButton icon="search" onClick={spotlight.openSpotlight} />*/}
             <HeaderButton icon="gear" onClick={openSettings} />
-            {backend.current && !props.share && props.canShare && (
-                <HeaderButton icon="share" onClick={copyLinkToClipboard}>
-                    <FormattedMessage
-                        defaultMessage="Compartir"
-                        description="Etiqueta para el botón utilizado para crear una URL pública compartida para un registro de chat"
-                    />
-                </HeaderButton>
-            )}
+            <HeaderButton icon="share" onClick={copyLinkToClipboard}>
+                <FormattedMessage
+                    defaultMessage="Compartir"
+                    description="Etiqueta para el botón utilizado para crear una URL pública compartida para un registro de chat"
+                />
+            </HeaderButton>
 
             <HeaderButton icon="plus" onClick={onNewChat} loading={loading} variant="light">
                 <FormattedMessage defaultMessage="Nuevo chat" description="Etiqueta para el botón utilizado para iniciar una nueva sesión de chat" />
@@ -259,8 +257,7 @@ export default function Header(props: HeaderProps) {
                 </Button>
             </Modal>
         )}
-    </>), [sidebarOpen, onBurgerClick, props.title, props.share, props.canShare, props.onShare, openSettings, onNewChat,
-        loading, context.authenticated, context.sessionExpired, context.isHome, context.isShare, spotlight.openSpotlight, signIn, signUp]);
+    </>), [context.sessionExpired, context.isHome, signIn, props.title, sidebarOpen, onBurgerClick, burgerLabel, openSettings, copyLinkToClipboard, onNewChat, loading, showConfirmationModal, handleCancelCopy, linkToCopy, handleConfirmCopy]);
 
     return header;
 }
