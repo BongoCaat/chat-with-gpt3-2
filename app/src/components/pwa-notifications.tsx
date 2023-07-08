@@ -22,9 +22,9 @@ export function InstallUpdateNotification() {
 
     return updateAvailable ? (
         <Notification title="¡Actualización disponible!" onClose={onClose}>
-            Click{" "}
+            Haz click en {" "}
             <Button compact onClick={onUpdate}>
-                Actualizar ahora
+                Actualizar
             </Button>{" "}
             Para obtener la última versión.
         </Notification>
