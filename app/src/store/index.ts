@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
 import messageReducer from './message';
-import uiReducer from './ui';
 import settingsUIReducer from './settings-ui';
 import sidebarReducer from './sidebar';
 import pwaReducer from './pwa';
+import uiReducer from './ui';
 
 
 const persistConfig = {
@@ -28,13 +28,19 @@ const persistMessageConfig = {
 
 const store = configureStore({
   reducer: {
-    message: persistReducer(persistMessageConfig, messageReducer),
+    message: persistReducer<ReturnType<typeof messageReducer>>(persistMessageConfig, messageReducer),
     ui: uiReducer,
     settingsUI: settingsUIReducer,
-    sidebar: persistReducer(persistSidebarConfig, sidebarReducer),
+    sidebar: persistReducer<ReturnType<typeof sidebarReducer>>(persistSidebarConfig, sidebarReducer),
     pwa: pwaReducer,
   },
-})
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
