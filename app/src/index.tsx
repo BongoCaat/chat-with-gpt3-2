@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-
+/*
 async function loadLocaleData(locale: string) {
     const response = await fetch(`/lang/${locale}.json`);
     if (!response.ok) {
@@ -60,16 +60,16 @@ async function loadLocaleData(locale: string) {
     }
     return messages;
 }
-
+*/
 async function bootstrapApplication() {
-    const locale = navigator.language;
+    //const locale = navigator.language;
 
     let messages: any;
-    try {
+    /*try {
         messages = await loadLocaleData(locale.toLocaleLowerCase());
     } catch (e) {
         console.warn("No hay datos de configuración regional para", locale);
-    }
+    }*/
 
     root.render(
         <React.StrictMode>

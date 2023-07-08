@@ -11,7 +11,7 @@ export default class SessionRequestHandler extends RequestHandler {
                 const serviceConfig = (config.services as any)?.[key];
                 const apiKey = serviceConfig?.apiKey;
                 const loginRequired = serviceConfig?.loginRequired ?? true;
-                return apiKey && (!loginRequired || request.isAuthenticated());
+                return apiKey && (!loginRequired || this.userID);
             });
 
         if (request.oidc) {
@@ -41,7 +41,7 @@ export default class SessionRequestHandler extends RequestHandler {
             });
             return;
         }
-        
+
         res.json({
             authProvider: this.context.authProvider,
             authenticated: false,
