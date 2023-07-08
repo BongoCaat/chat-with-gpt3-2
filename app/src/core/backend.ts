@@ -250,30 +250,30 @@ export class Backend extends EventEmitter {
     }
 
     async get(url: string) {
-        const response = await fetch(url);
-        if (response.status === 429) {
+        const response = await this.get(url);
+        /*if (response.status === 429) {
             this.rateLimitedUntil = getRateLimitResetTimeFromResponse(response);
         }
         if (!response.ok) {
             throw new Error(response.statusText);
-        }
+        }*/
         return response.json();
     }
 
     async post(url: string, data: any) {
-        const response = await fetch(url, {
+        const response = await this.post(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
         });
-        if (response.status === 429) {
+        /*if (response.status === 429) {
             this.rateLimitedUntil = getRateLimitResetTimeFromResponse(response);
         }
         if (!response.ok) {
             throw new Error(response.statusText);
-        }
+        }*/
         return response.json();
     }
 }
