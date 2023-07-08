@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Helmet from 'react-helmet';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useSpotlight } from '@mantine/spotlight';
-import { Burger, Button, ButtonProps } from '@mantine/core';
+import { Burger, Button, ButtonProps, Modal } from '@mantine/core';
 import { useCallback, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../core/context';
@@ -14,6 +14,7 @@ import { selectSidebarOpen, toggleSidebar } from '../store/sidebar';
 import { openLoginModal, openSignupModal } from '../store/ui';
 import { useOption } from '../core/options/use-option';
 import { useHotkeys } from '@mantine/hooks';
+import slugify from 'slugify';
 
 const Banner = styled.div`
     background: rgba(224, 49, 49, 0.2);
@@ -168,6 +169,32 @@ export default function Header(props: HeaderProps) {
         dispatch(setTab(openAIApiKey ? 'chat' : 'user'));
     }, [openAIApiKey, dispatch]);
 
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [linkToCopy, setLinkToCopy] = useState('');
+
+    const copyLinkToClipboard = useCallback(async () => {
+        if (context.currentChat.chat) {
+            const id = await backend.current?.shareChat(context.currentChat.chat);
+            if (id) {
+                const slug = context.currentChat.chat.title
+                    ? '/' + slugify(context.currentChat.chat.title.toLocaleLowerCase())
+                    : '';
+                const url = window.location.origin + '/s/' + id + slug;
+                setLinkToCopy(url);
+                setShowConfirmationModal(true);
+            }
+        }
+    }, [context.currentChat.chat]);
+
+    const handleConfirmCopy = useCallback(() => {
+        navigator.clipboard.writeText(linkToCopy);
+        setShowConfirmationModal(false);
+    }, [linkToCopy]);
+
+    const handleCancelCopy = useCallback(() => {
+        setShowConfirmationModal(false);
+    }, []);
+
     const signIn = useCallback(() => {
         if ((window as any).AUTH_PROVIDER !== 'local') {
             backend.current?.signIn();
@@ -204,15 +231,35 @@ export default function Header(props: HeaderProps) {
             <div className="spacer" />
             {/*<HeaderButton icon="search" onClick={spotlight.openSpotlight} />*/}
             <HeaderButton icon="gear" onClick={openSettings} />
-            {backend.current && !props.share && props.canShare && /*typeof navigator.share !== 'undefined' &&*/ <HeaderButton icon="share" onClick={props.onShare}>
-                <FormattedMessage defaultMessage="Compartir" description="Etiqueta para el botón utilizado para crear una URL pública compartida para un registro de chat" />
-            </HeaderButton>}
+            {backend.current && !props.share && props.canShare && (
+                <HeaderButton icon="share" onClick={copyLinkToClipboard}>
+                    <FormattedMessage
+                        defaultMessage="Compartir"
+                        description="Etiqueta para el botón utilizado para crear una URL pública compartida para un registro de chat"
+                    />
+                </HeaderButton>
+            )}
 
             <HeaderButton icon="plus" onClick={onNewChat} loading={loading} variant="light">
                 <FormattedMessage defaultMessage="Nuevo chat" description="Etiqueta para el botón utilizado para iniciar una nueva sesión de chat" />
             </HeaderButton>
         </HeaderContainer>
-    </>), [sidebarOpen, onBurgerClick, props.title, props.share, props.canShare, props.onShare, openSettings, onNewChat, 
+        {showConfirmationModal && (
+            <Modal
+                opened
+                onClose={handleCancelCopy}
+                title="Confirmar copia de enlace"
+                size="xs"
+            >
+                <p>¿Estás seguro de que deseas copiar el siguiente enlace al portapapeles?</p>
+                <p>{linkToCopy}</p>
+                <Button onClick={handleConfirmCopy}>Copiar enlace</Button>
+                <Button onClick={handleCancelCopy} variant="light">
+                    Cancelar
+                </Button>
+            </Modal>
+        )}
+    </>), [sidebarOpen, onBurgerClick, props.title, props.share, props.canShare, props.onShare, openSettings, onNewChat,
         loading, context.authenticated, context.sessionExpired, context.isHome, context.isShare, spotlight.openSpotlight, signIn, signUp]);
 
     return header;
