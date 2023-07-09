@@ -1,11 +1,6 @@
-import { compareUint8Array } from "../utils";
-
 const MAX_NUM_THREADS = 128;
 
 type MergeRange = { start: number, end: number };
-
-const textDecoder = new TextDecoder();
-const textEncoder = new TextEncoder();
 
 export class RankMap {
     private values = new Map<string, number>();
@@ -19,23 +14,23 @@ export class RankMap {
     }
 
     public set(bytes: Uint8Array, rank: number) {
-        const key = textDecoder.decode(bytes);
+        const key = Buffer.from(bytes).toString();
         this.values.set(key, rank);
     }
 
     public get(bytes: Uint8Array) {
-        const key = textDecoder.decode(bytes);
+        const key = Buffer.from(bytes).toString();
         return this.values.get(key);
     }
 
     public keys() {
-        return Array.from(this.values.keys()).map(k => textEncoder.encode(k));
+        return Array.from(this.values.keys()).map(k => Buffer.from(k));
     }
 
     public inverted() {
         const inverted = new Map<number, Uint8Array>();
         for (const [key, value] of Array.from(this.values.entries())) {
-            inverted.set(value, textEncoder.encode(key));
+            inverted.set(value, new Uint8Array(Buffer.from(key)));
         }
         return inverted;
     }
@@ -105,10 +100,10 @@ export class CoreBPE {
         const decoder: Map<number, Uint8Array> = encoder.inverted();
 
         const specialTokensDecoder: Map<number, Uint8Array> = new Map(
-            Array.from(specialTokensEncoder.entries()).map(([k, v]) => [v, textEncoder.encode(k)])
+            Array.from(specialTokensEncoder.entries()).map(([k, v]) => [v, new Uint8Array(Buffer.from(k))])
         );
         const sortedTokenBytes: Uint8Array[] = Array.from(encoder.keys());
-        sortedTokenBytes.sort((a, b) => compareUint8Array(a, b));
+        sortedTokenBytes.sort((a, b) => Buffer.compare(a, b));
 
         this.encoder = encoder;
         this.specialTokensEncoder = specialTokensEncoder;
@@ -141,7 +136,7 @@ export class CoreBPE {
         const ret: number[] = [];
         let match: RegExpExecArray | null;
         while ((match = regex.exec(text)) !== null) {
-            const piece = textEncoder.encode(match[0]);
+            const piece = new Uint8Array(Buffer.from(match[0]));
             const token = this.encoder.get(piece);
             if (token !== undefined) {
                 ret.push(token);
@@ -172,7 +167,7 @@ export class CoreBPE {
             const end = nextSpecial === null ? text.length : nextSpecial.index;
             let match: RegExpExecArray | null;
             while ((match = regex.exec(text.slice(start, end))) !== null) {
-                const piece = textEncoder.encode(match[0]);
+                const piece = new Uint8Array(Buffer.from(match[0]));
                 const token = this.encoder.get(piece);
                 if (token !== undefined) {
                     lastPieceTokenLen = 1;
@@ -213,7 +208,7 @@ export class CoreBPE {
         if (token !== undefined) {
             return token;
         }
-        const pieceStr = textDecoder.decode(piece);
+        const pieceStr = Buffer.from(piece).toString("utf-8");
         if (this.specialTokensEncoder.has(pieceStr)) {
             return this.specialTokensEncoder.get(pieceStr)!;
         }

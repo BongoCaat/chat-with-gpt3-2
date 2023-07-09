@@ -14,7 +14,7 @@ import { setUpdateAvailable } from "./store/pwa";
 import ChatPage from './components/pages/chat';
 import LandingPage from './components/pages/landing';
 
-import "./index.css";
+import './index.scss';
 
 const router = createBrowserRouter([
     {
