@@ -21,7 +21,7 @@ export function InstallUpdateNotification() {
     }, [dispatch]);
 
     return updateAvailable ? (
-        <Notification style={{ zIndex: 999, position: "absolute" }} title="¡Actualización disponible!" onClose={onClose}>
+        <Notification title="¡Actualización disponible!" onClose={onClose}>
             Haz click en {" "}
             <Button compact onClick={onUpdate}>
                 Actualizar
